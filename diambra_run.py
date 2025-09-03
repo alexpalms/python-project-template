@@ -8,6 +8,10 @@ import diambra.arena
 from diambra.arena import SpaceTypes, Roles, EnvironmentSettings
 from diambra.arena.utils.gym_utils import available_games
 import json
+import argparse
+
+from agents import RandomAgent
+from agents import RandomAgentWithCustomMoves
 
 MAX_TOKENS = 200
 
@@ -57,7 +61,7 @@ def user_chat(llm: LLM):
 
     return prompt_structured_output
 
-def run_diambra_random_agent(prompt_structured_output: PromptStructuredOutput):
+def run_diambra(agent_type: str, prompt_structured_output: PromptStructuredOutput):
     game_id = prompt_structured_output["game_id"]
     characters = prompt_structured_output["characters"]
 
@@ -69,10 +73,16 @@ def run_diambra_random_agent(prompt_structured_output: PromptStructuredOutput):
     settings.action_space = SpaceTypes.MULTI_DISCRETE
 
     env = diambra.arena.make(game_id, settings)
+    if agent_type == "random":
+        agent = RandomAgent(env)
+    elif agent_type == "random_with_custom_moves":
+        agent = RandomAgentWithCustomMoves(env, None)
+    else:
+        raise ValueError(f"Invalid agent type: {agent_type}")
     observation, info = env.reset()
 
     while True:
-        action = env.action_space.sample()
+        action = agent.get_action()
         observation, reward, terminated, truncated, info = env.step(action)
 
         if terminated or truncated:
@@ -86,13 +96,20 @@ def run_diambra_random_agent(prompt_structured_output: PromptStructuredOutput):
     return 0
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--agent-type", type=str, default="random")
+    args = parser.parse_args()
+
     # Initialize the LLM
-    llm = LLM(model="unsloth/Llama-3.2-3B-Instruct-bnb-4bit", max_model_len=2000, gpu_memory_utilization=0.7)
+    #llm = LLM(model="unsloth/Llama-3.2-3B-Instruct-bnb-4bit", max_model_len=2000, gpu_memory_utilization=0.7)
 
     while True:
-        prompt_structured_output = json.loads(user_chat(llm))
+        #prompt_structured_output = json.loads(user_chat(llm))
+        prompt_structured_output = {"game_id": "doapp", "characters": ["Kasumi"]}
         print("Environment settings: ", prompt_structured_output)
-        run_diambra_random_agent(prompt_structured_output)
+        run_diambra(args.agent_type, prompt_structured_output)
         continue_answer = input("New episode? (y/[n]): ")
         if continue_answer.lower() != "y":
             break
+
+    #llm.close()
