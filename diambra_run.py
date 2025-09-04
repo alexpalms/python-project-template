@@ -72,7 +72,7 @@ def run_diambra(agent_type: str, prompt_structured_output: PromptStructuredOutpu
     settings.characters = characters
     settings.action_space = SpaceTypes.MULTI_DISCRETE
 
-    env = diambra.arena.make(game_id, settings)
+    env = diambra.arena.make(game_id, settings, render_mode="human")
     if agent_type == "random":
         agent = RandomAgent(env)
     elif agent_type == "random_with_custom_moves":
@@ -82,7 +82,9 @@ def run_diambra(agent_type: str, prompt_structured_output: PromptStructuredOutpu
     observation, info = env.reset()
 
     while True:
+        env.render()
         action = agent.get_action()
+        print("Action: ", action)
         observation, reward, terminated, truncated, info = env.step(action)
 
         if terminated or truncated:
@@ -105,7 +107,7 @@ if __name__ == "__main__":
 
     while True:
         #prompt_structured_output = json.loads(user_chat(llm))
-        prompt_structured_output = {"game_id": "doapp", "characters": ["Kasumi"]}
+        prompt_structured_output = {"game_id": "sfiii3n", "characters": ["Ryu"]}
         print("Environment settings: ", prompt_structured_output)
         run_diambra(args.agent_type, prompt_structured_output)
         continue_answer = input("New episode? (y/[n]): ")

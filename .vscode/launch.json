@@ -2,16 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Run with Custom ENV",
+            "name": "Diambra Run",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/diambra_run.py",
             "args": [
-                "--agent-type ${agent_type}",
+                "--agent-type", "${input:agent_type}",
             ],
             "env": {
                 "PYTHONPATH": "${workspaceFolder}",
-                "DIAMBRA_ENVS": "${DIAMBRA_ENVS}"
+                "DIAMBRA_ENVS": "${input:DIAMBRA_ENVS}"
             },
             "console": "integratedTerminal",
             "justMyCode": true
@@ -29,7 +29,7 @@
             "id": "DIAMBRA_ENVS",
             "type": "promptString",
             "description": "Select the DIAMBRA_ENVS",
-            "default": "127.0.0.1:31216"
+            "default": "127.0.0.1:32785"
         }
     ]
 }
