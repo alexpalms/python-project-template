@@ -9,7 +9,7 @@ import json
 
 MAX_TOKENS = 200
 
-class GameAndCharacterSelectionOutput(BaseModel):
+class GameAndCharacterSelection(BaseModel):
     game_id: str
     characters: tuple[str, ...]
 
@@ -53,7 +53,7 @@ def game_and_character_selection(llm: LLM):
 
     user_input = input("Describe the game and the character(s) you want to use in your agent: ")
 
-    return llm_generate(llm, prompt_json + user_input, GameAndCharacterSelectionOutput)
+    return llm_generate(llm, prompt_json + user_input, GameAndCharacterSelection)
 
 class ActionsSelectionOutput(BaseModel):
     game_id: str

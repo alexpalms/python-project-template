@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-from llm_chat import game_and_character_selection
-from llm_chat import PromptStructuredOutput
+from llm_chat import game_and_character_selection, GameAndCharacterSelection
 
 from vllm import LLM
 
@@ -13,9 +12,9 @@ import argparse
 from agents import RandomAgent
 from agents import RandomAgentWithCustomActions
 
-def run_diambra(agent_type: str, prompt_structured_output: PromptStructuredOutput):
-    game_id = prompt_structured_output["game_id"]
-    characters = prompt_structured_output["characters"]
+def run_diambra(agent_type: str, game_id_and_character_selection_config: GameAndCharacterSelection):
+    game_id = game_id_and_character_selection_config["game_id"]
+    characters = game_id_and_character_selection_config["characters"]
 
     # Settings
     settings = EnvironmentSettings()
@@ -36,7 +35,7 @@ def run_diambra(agent_type: str, prompt_structured_output: PromptStructuredOutpu
 
     while True:
         env.render()
-        action = agent.get_action()
+        action = agent.get_action(observation)
         print("Action: ", action)
         observation, reward, terminated, truncated, info = env.step(action)
 

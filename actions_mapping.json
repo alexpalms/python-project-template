@@ -1,8 +1,8 @@
 {
     "all":
         {
-            "moves-p1": ["", "B", "B-U", "U", "F-U", "F", "F-D", "D", "B-D"],
-            "moves-p2": ["", "F", "F-U", "U", "B-U", "B", "B-D", "D", "F-D"]
+            "moves_p1": ["", "B", "B-U", "U", "F-U", "F", "F-D", "D", "B-D"],
+            "moves_p2": ["", "F", "F-U", "U", "B-U", "B", "B-D", "D", "F-D"]
         },
     "doapp":
         {

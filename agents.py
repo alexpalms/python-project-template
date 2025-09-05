@@ -1,6 +1,7 @@
 import random
 import json
 import os
+from diambra.arena import Roles
 
 class RandomAgent:
     def __init__(self, env):
@@ -50,18 +51,21 @@ class RandomAgentWithCustomActions:
             self.actions[0].append(new_action_p1)
             self.actions[1].append(new_action_p2)
 
-        for action in self.actions:
-            assert len(action[0][0]) == len(action[0][1]) and len(action[1][0]) == len(action[1][1]), "The number of moves and the attacks must be the same"
+        for i in range(2):
+            for action in self.actions[i]:
+                assert len(action[0]) == len(action[1]), "The number of moves and the attacks must be the same"
 
         self.executing_action = False
         self.execution_idx = 0
         self.selected_action = [[0], [0]]
 
     def get_action(self, observation):
+        role_name = Roles.Name(self.env.env_settings.pb_model.episode_settings.player_settings[0].role)
         action_to_execute = [0, 0]
+        side = observation[role_name]["side"]
         if not self.executing_action:
             # Randomly select an action from the list of actions
-            self.selected_action = self.actions[random.randint(0, len(self.actions) - 1)]
+            self.selected_action = self.actions[side][random.randint(0, len(self.actions[side]) - 1)]
 
             if len(self.selected_action[0]) > 1:
                 self.executing_action = True
