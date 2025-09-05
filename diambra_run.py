@@ -100,18 +100,26 @@ def run_diambra(agent_type: str, prompt_structured_output: PromptStructuredOutpu
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--agent-type", type=str, default="random")
+    parser.add_argument("--llm", type=str, default="false")
     args = parser.parse_args()
 
     # Initialize the LLM
-    #llm = LLM(model="unsloth/Llama-3.2-3B-Instruct-bnb-4bit", max_model_len=2000, gpu_memory_utilization=0.7)
+    if args.llm == "true":
+        llm = LLM(model="unsloth/Llama-3.2-3B-Instruct-bnb-4bit", max_model_len=2000, gpu_memory_utilization=0.7)
+    else:
+        llm = None
 
     while True:
-        #prompt_structured_output = json.loads(user_chat(llm))
-        prompt_structured_output = {"game_id": "sfiii3n", "characters": ["Ryu"]}
+        if args.llm == "true":
+            prompt_structured_output = json.loads(user_chat(llm))
+        else:
+            prompt_structured_output = {"game_id": "sfiii3n", "characters": ["Ryu"]}
+
         print("Environment settings: ", prompt_structured_output)
         run_diambra(args.agent_type, prompt_structured_output)
         continue_answer = input("New episode? (y/[n]): ")
         if continue_answer.lower() != "y":
             break
 
-    #llm.close()
+    if args.llm == "true":
+        llm.close()
