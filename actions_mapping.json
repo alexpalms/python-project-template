@@ -1,19 +1,20 @@
 {
     "all":
         {
-            "moves": ["", "L", "L+U", "U", "R+U", "R", "R+D", "D", "L+D"]
+            "moves-p1": ["", "B", "B-U", "U", "F-U", "F", "F-D", "D", "B-D"],
+            "moves-p2": ["", "F", "F-U", "U", "B-U", "B", "B-D", "D", "F-D"]
         },
     "doapp":
         {
-            "attacks": ["", "H", "P", "K", "H+P", "H+K", "P+K", "H+P+K"]
+            "attacks": ["", "H", "P", "K", "H-P", "H-K", "P-K", "H-P-K"]
         },
     "sfiii3n":
         {
-            "attacks": ["", "LP", "MP", "HP", "LK", "MK", "HK", "LP+LK", "MP+MK", "HP+HK"]
+            "attacks": ["", "LP", "MP", "HP", "LK", "MK", "HK", "LP-LK", "MP-MK", "HP-HK"]
         },
     "tektagt":
         {
-            "attacks": ["", "LP", "RP", "LK", "RK", "TAG", "HK", "LP+RP", "LP+LK", "LP+RK", "RP+LK", "RP+RK", "RP+TAG", "LK+RK"]
+            "attacks": ["", "LP", "RP", "LK", "RK", "TAG", "HK", "LP-RP", "LP-LK", "LP-RK", "RP-LK", "RP-RK", "RP-TAG", "LK-RK"]
         },
     "umk3":
         {
@@ -21,22 +22,22 @@
         },
     "samsh5sp":
         {
-            "attacks": ["", "WS", "MS", "K", "M", "WS+MS", "MS+K", "WS+K", "K+M", "WS+MS+K", "MS+K+M"]
+            "attacks": ["", "WS", "MS", "K", "M", "WS-MS", "MS-K", "WS-K", "K-M", "WS-MS-K", "MS-K-M"]
         },
     "kof98umh":
         {
-            "attacks": ["", "WP", "WK", "SP", "SK", "WP+WK", "SP+SK", "WP+WK+SP+SK", "WP+WK+SP"]
+            "attacks": ["", "WP", "WK", "SP", "SK", "WP-WK", "SP-SK", "WP-WK-SP-SK", "WP-WK-SP"]
         },
     "mvsc":
         {
-            "attacks": ["", "WP", "MP", "SP", "WK", "MK", "SK", "WP+MP", "MP+SP", "WP+SP", "WK+MK", "MK+SK", "WK+SK", "WP+WK", "MP+MK", "SP+SK", "MP+WK", "WP+MP+SP", "WK+MK+SK"]
+            "attacks": ["", "WP", "MP", "SP", "WK", "MK", "SK", "WP-MP", "MP-SP", "WP-SP", "WK-MK", "MK-SK", "WK-SK", "WP-WK", "MP-MK", "SP-SK", "MP-WK", "WP-MP-SP", "WK-MK-SK"]
         },
     "xmvsf":
         {
-            "attacks": ["", "WP", "MP", "SP", "WK", "MK", "SK", "WP+MP", "MP+SP", "WP+SP", "WK+MK", "MK+SK", "WK+SK", "WP+WK", "SP+SK", "MP+WK", "WP+MP+SP", "WK+MK+SK"]
+            "attacks": ["", "WP", "MP", "SP", "WK", "MK", "SK", "WP-MP", "MP-SP", "WP-SP", "WK-MK", "MK-SK", "WK-SK", "WP-WK", "SP-SK", "MP-WK", "WP-MP-SP", "WK-MK-SK"]
         },
     "soulclbr":
         {
-            "attacks": ["", "HA", "VA", "K", "G", "HA+VA", "HA+K", "VA+K", "HA+G", "VA+G", "K+G", "HA+VA+K", "HA+VA+G"]
+            "attacks": ["", "HA", "VA", "K", "G", "HA-VA", "HA-K", "VA-K", "HA-G", "VA-G", "K-G", "HA-VA-K", "HA-VA-G"]
         }
 }

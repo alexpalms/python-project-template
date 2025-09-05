@@ -1,65 +1,17 @@
 #!/usr/bin/env python3
-from pydantic import BaseModel
+from llm_chat import game_and_character_selection
+from llm_chat import PromptStructuredOutput
 
-from vllm import LLM, SamplingParams
-from vllm.sampling_params import GuidedDecodingParams
+from vllm import LLM
 
 import diambra.arena
 from diambra.arena import SpaceTypes, Roles, EnvironmentSettings
-from diambra.arena.utils.gym_utils import available_games
+
 import json
 import argparse
 
 from agents import RandomAgent
-from agents import RandomAgentWithCustomMoves
-
-MAX_TOKENS = 200
-
-class PromptStructuredOutput(BaseModel):
-    game_id: str
-    characters: tuple[str, ...]
-
-json_schema = PromptStructuredOutput.model_json_schema()
-guided_decoding_params_json = GuidedDecodingParams(json=json_schema)
-sampling_params_json = SamplingParams(
-    guided_decoding=guided_decoding_params_json,
-    max_tokens=MAX_TOKENS,
-)
-
-def user_chat(llm: LLM):
-
-    game_data = available_games(False)
-    game_details_list = []
-    for k, v in game_data.items():
-        game_details_entry = {
-            "game_id": v["id"],
-            "game_name": v["name"],
-            "game_characters": [elem for elem in v["char_list"] if elem not in v["char_forbidden_list"]],
-            "number_of_chars_to_select": v["number_of_chars_to_select"],
-        }
-        game_details_list.append(game_details_entry)
-    game_details_list_str = ""
-    for game_details_entry in game_details_list:
-        game_details_list_str += json.dumps(game_details_entry) + "\n"
-
-
-    prompt_json = (
-        "From the following user defined text, generate a JSON with the fields:\n"
-        "\"game_id\": game identifier\n"
-        "\"characters\": the character(s) to be used in the game episode, the user is supposed to specify as many characters as specified in the \"number_of_chars_to_select\" field of the game details\n"
-        "and then respond with the JSON. The following details provide context for each of the games:\n"
-        f"{game_details_list_str}"
-        "\n\n"
-        "User defined text: "
-    )
-
-
-    user_input = input("Describe the game and the character(s) you want to use in your agent: ")
-
-    outputs = llm.generate(prompt_json + user_input, sampling_params=sampling_params_json)
-    prompt_structured_output = outputs[0].outputs[0].text
-
-    return prompt_structured_output
+from agents import RandomAgentWithCustomActions
 
 def run_diambra(agent_type: str, prompt_structured_output: PromptStructuredOutput):
     game_id = prompt_structured_output["game_id"]
@@ -76,7 +28,8 @@ def run_diambra(agent_type: str, prompt_structured_output: PromptStructuredOutpu
     if agent_type == "random":
         agent = RandomAgent(env)
     elif agent_type == "random_with_custom_moves":
-        agent = RandomAgentWithCustomMoves(env, None)
+        custom_actions = [["D", "F-D", "F+MP"]]
+        agent = RandomAgentWithCustomActions(env, custom_actions)
     else:
         raise ValueError(f"Invalid agent type: {agent_type}")
     observation, info = env.reset()
@@ -111,7 +64,7 @@ if __name__ == "__main__":
 
     while True:
         if args.llm == "true":
-            prompt_structured_output = json.loads(user_chat(llm))
+            prompt_structured_output = json.loads(game_and_character_selection(llm))
         else:
             prompt_structured_output = {"game_id": "sfiii3n", "characters": ["Ryu"]}
 

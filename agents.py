@@ -1,26 +1,63 @@
 import random
+import json
+import os
 
 class RandomAgent:
     def __init__(self, env):
         self.env = env
 
-    def get_action(self):
+    def get_action(self, observation):
         return self.env.action_space.sample()
 
-class RandomAgentWithCustomMoves:
-    def __init__(self, env, custom_moves):
+class RandomAgentWithCustomActions:
+    def __init__(self, env, custom_actions):
+        # Load actions mapping from JSON file
+        local_dir = os.path.dirname(os.path.abspath(__file__))
+        actions_mapping_path = os.path.join(local_dir, "actions_mapping.json")
+        assert os.path.exists(actions_mapping_path), f"Actions mapping file not found: {actions_mapping_path}"
+
+        with open(actions_mapping_path, 'r') as f:
+            self.actions_mapping = json.load(f)
+
         self.env = env
-        #self.actions = [ [[idx], [0]] for idx in range(9)]
-        self.actions = [[[7, 6, 5], [0, 0, 2]]]
-        #self.actions = [[[7], [0]]]
+        #self.actions = [[[7, 6, 5], [0, 0, 2]]]
+        self.actions = [[],[]]
+        moves_p1 = self.actions_mapping["all"]["moves_p1"]
+        moves_p2 = self.actions_mapping["all"]["moves_p2"]
+        attacks = self.actions_mapping[self.env.env_settings.game_id]["attacks"]
+        for custom_action in custom_actions:
+            new_action_p1 = [[],[]]
+            new_action_p2 = [[],[]]
+            for action in custom_action:
+                if "+" in action:
+                    action = action.split("+")
+                    assert action[0] in moves_p1 and action[1] in attacks, f"The custom action {action} is not valid"
+                    action_p1 = [moves_p1.index(action[0]), attacks.index(action[1])]
+                    action_p2 = [moves_p2.index(action[0]), attacks.index(action[1])]
+                else:
+                    if action in moves_p1:
+                        action_p1 = [moves_p1.index(action), 0]
+                        action_p2 = [moves_p2.index(action), 0]
+                    elif action in attacks:
+                        action_p1 = [0, attacks.index(action)]
+                        action_p2 = [0, attacks.index(action)]
+                    else:
+                        assert False, f"The custom action {action} is not valid"
+                new_action_p1[0].append(action_p1[0])
+                new_action_p1[1].append(action_p1[1])
+                new_action_p2[0].append(action_p2[0])
+                new_action_p2[1].append(action_p2[1])
+            self.actions[0].append(new_action_p1)
+            self.actions[1].append(new_action_p2)
+
         for action in self.actions:
-            assert len(action[0]) == len(action[1]), "The number of moves and the attacks must be the same"
+            assert len(action[0][0]) == len(action[0][1]) and len(action[1][0]) == len(action[1][1]), "The number of moves and the attacks must be the same"
 
         self.executing_action = False
         self.execution_idx = 0
         self.selected_action = [[0], [0]]
 
-    def get_action(self):
+    def get_action(self, observation):
         action_to_execute = [0, 0]
         if not self.executing_action:
             # Randomly select an action from the list of actions
