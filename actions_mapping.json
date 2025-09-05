@@ -1,7 +1,7 @@
 {
     "all":
         {
-            "moves": ["", "L", "L+U", "U", "R+U", "R", "L+D", "D", "R+D"]
+            "moves": ["", "L", "L+U", "U", "R+U", "R", "R+D", "D", "L+D"]
         },
     "doapp":
         {

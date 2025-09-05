@@ -10,7 +10,12 @@ class RandomAgent:
 class RandomAgentWithCustomMoves:
     def __init__(self, env, custom_moves):
         self.env = env
-        self.actions = [ [[idx], [0]] for idx in range(9)]
+        #self.actions = [ [[idx], [0]] for idx in range(9)]
+        self.actions = [[[7, 6, 5], [0, 0, 2]]]
+        #self.actions = [[[7], [0]]]
+        for action in self.actions:
+            assert len(action[0]) == len(action[1]), "The number of moves and the attacks must be the same"
+
         self.executing_action = False
         self.execution_idx = 0
         self.selected_action = [[0], [0]]
@@ -27,7 +32,7 @@ class RandomAgentWithCustomMoves:
         else:
             self.execution_idx += 1
             action_to_execute = [self.selected_action[0][self.execution_idx], self.selected_action[1][self.execution_idx]]
-            if self.execution_idx == len(self.actions[self.selected_action[0]])-1:
+            if self.execution_idx == (len(self.selected_action[0]) - 1):
                 self.executing_action = False
                 self.execution_idx = 0
 
