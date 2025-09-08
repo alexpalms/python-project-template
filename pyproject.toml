@@ -1,3 +1,18 @@
+[project]
+name = "text-to-fight"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "bitsandbytes>=0.47.0",
+    "diambra>=0.0.20",
+    "diambra-arena>=2.2.7",
+    "mypy>=1.17.1",
+    "pre-commit>=4.3.0",
+    "vllm>=0.10.1.1",
+]
+
 [tool.mypy]
 strict = true
 python_version = "3.11"

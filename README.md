@@ -3,6 +3,29 @@
 
 ### Code quality
 
+#### Package structure
+
+- Scheme:
+```
+text-to-fight/
+├── pyproject.toml
+├── src/
+│   └── text_to_fight/
+│       ├── __init__.py
+│       ├── llm_chat.py
+│       └── agents.py
+├── scripts/
+│   └── diambra_run.py
+├── tests/
+│   └── __init__.py
+├── requirements.txt   # optional, for legacy pip users
+
+```
+
+- Install `uv` ([Ref](https://github.com/astral-sh/uv))
+  - `pip install uv` in the general python environment (not inside virtual envs)
+  - Add `export PATH="$HOME/.local/bin:$PATH"` to `~/.bashrc`
+
 #### Type Hints
 
 - Extensions:
