@@ -2,7 +2,7 @@
 from text_to_fight.llm_chat import game_and_character_selection
 
 from vllm import LLM
-from typing import Union
+from typing import Optional
 
 import diambra.arena # type: ignore[import-untyped]
 from diambra.arena import SpaceTypes, Roles, EnvironmentSettings
@@ -27,7 +27,7 @@ def run_diambra(agent_type: str, game_id_and_character_selection_config: dict[st
     settings.characters = characters
     settings.action_space = SpaceTypes.MULTI_DISCRETE # pyright: ignore
 
-    env: TypedEnvironment = diambra.arena.make(game_id, settings, render_mode="human") # pyright: ignore
+    env = TypedEnvironment(diambra.arena.make(game_id, settings, render_mode="rgb_array")) # pyright: ignore
 
     agent: Agent
     if agent_type == "random":
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Initialize the LLM
-    llm: Union[LLM, None] = None
+    llm: Optional[LLM] = None
     if args.llm == "true":
         llm = LLM(model="unsloth/Llama-3.2-3B-Instruct-bnb-4bit", max_model_len=2000, gpu_memory_utilization=0.7)
 

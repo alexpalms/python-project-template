@@ -1,9 +1,13 @@
 {
-    "python.analysis.typeCheckingMode": "strict",   // enforce strict typing
+    //"python.analysis.typeCheckingMode": "strict",   // enforce strict typing
+    "include": ["src", "scripts", "tests"],
     "typeCheckingMode": "strict",
-    "reportMissingParameterType": "warning",
-    "reportMissingTypeArgument": "warning",
-    "reportUntypedFunctionDecorator": "warning",
-    "reportUntypedFunctionCall": "warning",
+    "reportUnusedVariable": "error",
+    "reportMissingImports": "error",
+    "reportMissingParameterType": "error",
+    "reportMissingTypeArgument": "error",
+    "reportUntypedFunctionDecorator": "error",
+    "reportUntypedFunctionCall": "error",
     "reportMissingTypeStubs": "none"
+
 }

@@ -7,7 +7,6 @@ from vllm.sampling_params import GuidedDecodingParams
 from diambra.arena.utils.gym_utils import available_games # type: ignore[import-untyped]
 
 import json
-import os
 
 MAX_TOKENS = 200
 

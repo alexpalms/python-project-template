@@ -3,11 +3,12 @@ import json
 import os
 from typing import Any
 from abc import abstractmethod
-from diambra.arena import Roles  # type: ignore[import-untyped]
+from diambra.arena import Roles # type: ignore[import-untyped]
+from text_to_fight.utils import TypedEnvironment
 
 class Agent:
     @abstractmethod
-    def __init__(self, env: Any) -> None:
+    def __init__(self, env: TypedEnvironment) -> None:
         raise NotImplementedError
 
     @abstractmethod
@@ -15,16 +16,16 @@ class Agent:
         raise NotImplementedError
 
 class RandomAgent(Agent):
-    def __init__(self, env: Any):
-        self.env: Any = env
+    def __init__(self, env: TypedEnvironment):
+        self.env = env.diambra_env
 
     def get_action(self, observation: dict[str, Any]) -> list[int]:
         actions: list[int] = self.env.action_space.sample()
         return actions
 
 class RandomAgentWithCustomActions(Agent):
-    def __init__(self, env: Any, custom_actions: list[list[str]]):
-        self.env: Any = env
+    def __init__(self, env: TypedEnvironment, custom_actions: list[list[str]]):
+        self.env = env.diambra_env
         # Load actions mapping from JSON file
         local_dir = os.path.dirname(os.path.abspath(__file__))
         actions_mapping_path = os.path.join(local_dir, "actions_mapping.json")
