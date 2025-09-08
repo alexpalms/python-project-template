@@ -24,8 +24,11 @@ jobs:
       - name: Install uv
         run: pip install uv
 
+      - name: Install dependencies
+        run: uv sync
+
       - name: Run mypy
-        run: uvx mypy
+        run: uv run mypy
 
       - name: Run pyright
-        run: uvx pyright
+        run: uv run pyright
