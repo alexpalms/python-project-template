@@ -1,4 +1,4 @@
-name: Type Hints Checking
+name: Type Hints Checks
 
 on:
   workflow_dispatch:
@@ -8,7 +8,8 @@ on:
     branches: [main]
 
 jobs:
-  type-hints-check:
+  type-hints-checks:
+    name: Type Hints Checks
     runs-on: ubuntu-latest
 
     steps:
@@ -23,11 +24,8 @@ jobs:
       - name: Install uv
         run: pip install uv
 
-      - name: Install dependencies
-        run: uv add mypy pyright
-
       - name: Run mypy
-        run: uv run mypy
+        run: uvx run mypy
 
       - name: Run pyright
-        run: uv run pyright
+        run: uvx run pyright
