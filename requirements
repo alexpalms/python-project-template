@@ -2,3 +2,5 @@ diambra
 diambra-arena
 llvm
 bitsandbytes
+mypy
+pre-commit

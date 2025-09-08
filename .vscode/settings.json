@@ -1,0 +1,4 @@
+{
+    "editor.parameterHints.enabled": true,          // inline hint suggestions
+    "editor.inlayHints.enabled": "on",               // show inferred types in editor
+}

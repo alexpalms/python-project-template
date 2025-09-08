@@ -5,7 +5,7 @@
             "name": "Diambra Run",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/diambra_run.py",
+            "program": "${workspaceFolder}/scripts/diambra_run.py",
             "args": [
                 "--agent-type", "${input:agent_type}",
                 "--llm", "${input:llm}"

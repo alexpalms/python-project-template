@@ -1,29 +1,35 @@
 #!/usr/bin/env python3
-from llm_chat import game_and_character_selection, GameAndCharacterSelection
+from text_to_fight.llm_chat import game_and_character_selection
 
 from vllm import LLM
+from typing import Union
 
-import diambra.arena
+import diambra.arena # type: ignore[import-untyped]
 from diambra.arena import SpaceTypes, Roles, EnvironmentSettings
 
 import json
 import argparse
+from typing import Any
 
-from agents import RandomAgent
-from agents import RandomAgentWithCustomActions
+from text_to_fight.utils import TypedEnvironment
 
-def run_diambra(agent_type: str, game_id_and_character_selection_config: GameAndCharacterSelection):
+from text_to_fight.agents import RandomAgent, Agent
+from text_to_fight.agents import RandomAgentWithCustomActions
+
+def run_diambra(agent_type: str, game_id_and_character_selection_config: dict[str, Any]) -> None:
     game_id = game_id_and_character_selection_config["game_id"]
     characters = game_id_and_character_selection_config["characters"]
 
     # Settings
     settings = EnvironmentSettings()
     settings.step_ratio = 6
-    settings.role = Roles.P1
+    settings.role = Roles.P1 # pyright: ignore
     settings.characters = characters
-    settings.action_space = SpaceTypes.MULTI_DISCRETE
+    settings.action_space = SpaceTypes.MULTI_DISCRETE # pyright: ignore
 
-    env = diambra.arena.make(game_id, settings, render_mode="human")
+    env: TypedEnvironment = diambra.arena.make(game_id, settings, render_mode="human") # pyright: ignore
+
+    agent: Agent
     if agent_type == "random":
         agent = RandomAgent(env)
     elif agent_type == "random_with_custom_moves":
@@ -31,23 +37,20 @@ def run_diambra(agent_type: str, game_id_and_character_selection_config: GameAnd
         agent = RandomAgentWithCustomActions(env, custom_actions)
     else:
         raise ValueError(f"Invalid agent type: {agent_type}")
-    observation, info = env.reset()
+    observation, _ = env.reset()
 
     while True:
         env.render()
         action = agent.get_action(observation)
         print("Action: ", action)
-        observation, reward, terminated, truncated, info = env.step(action)
+        observation, _, terminated, truncated, _ = env.step(action)
 
         if terminated or truncated:
-            observation, info = env.reset()
+            observation, _ = env.reset()
             break
 
     # Close the environment
     env.close()
-
-    # Return success
-    return 0
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -56,13 +59,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Initialize the LLM
+    llm: Union[LLM, None] = None
     if args.llm == "true":
         llm = LLM(model="unsloth/Llama-3.2-3B-Instruct-bnb-4bit", max_model_len=2000, gpu_memory_utilization=0.7)
-    else:
-        llm = None
 
     while True:
-        if args.llm == "true":
+        if llm is not None:
             prompt_structured_output = json.loads(game_and_character_selection(llm))
         else:
             prompt_structured_output = {"game_id": "sfiii3n", "characters": ["Ryu"]}
@@ -72,6 +74,3 @@ if __name__ == "__main__":
         continue_answer = input("New episode? (y/[n]): ")
         if continue_answer.lower() != "y":
             break
-
-    if args.llm == "true":
-        llm.close()

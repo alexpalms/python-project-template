@@ -1,0 +1,9 @@
+{
+    "python.analysis.typeCheckingMode": "strict",   // enforce strict typing
+    "typeCheckingMode": "strict",
+    "reportMissingParameterType": "warning",
+    "reportMissingTypeArgument": "warning",
+    "reportUntypedFunctionDecorator": "warning",
+    "reportUntypedFunctionCall": "warning",
+    "reportMissingTypeStubs": "none"
+}
