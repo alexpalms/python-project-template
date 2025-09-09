@@ -1,3 +1,5 @@
+"""Agents module."""
+
 import json
 import os
 import random
@@ -10,26 +12,69 @@ from text_to_fight.utils import TypedEnvironment
 
 
 class Agent:
+    """Agent that selects actions."""
+
     @abstractmethod
     def __init__(self, env: TypedEnvironment) -> None:
+        """Initialize the agent.
+
+        Args:
+            env: The environment to use.
+
+        """
         raise NotImplementedError
 
     @abstractmethod
     def get_action(self, observation: dict[str, Any]) -> list[int]:
+        """Get an action from the agent.
+
+        Args:
+            observation: The observation from the environment.
+
+        Returns:
+            The action to execute.
+
+        """
         raise NotImplementedError
 
 
 class RandomAgent(Agent):
+    """Agent that selects random actions."""
+
     def __init__(self, env: TypedEnvironment):
+        """Initialize the agent.
+
+        Args:
+            env: The environment to use.
+
+        """
         self.env = env.diambra_env
 
     def get_action(self, observation: dict[str, Any]) -> list[int]:
+        """Get an action from the agent.
+
+        Args:
+            observation: The observation from the environment.
+
+        Returns:
+            The action to execute.
+
+        """
         actions: list[int] = self.env.action_space.sample()
         return actions
 
 
 class RandomAgentWithCustomActions(Agent):
+    """Agent that selects actions from a list of custom actions."""
+
     def __init__(self, env: TypedEnvironment, custom_actions: list[list[str]]):
+        """Initialize the agent.
+
+        Args:
+            env: The environment to use.
+            custom_actions: The list of custom actions to use.
+
+        """
         self.env = env.diambra_env
         # Load actions mapping from JSON file
         local_dir = os.path.dirname(os.path.abspath(__file__))
@@ -86,6 +131,15 @@ class RandomAgentWithCustomActions(Agent):
         self.selected_action = [[0], [0]]
 
     def get_action(self, observation: dict[str, Any]) -> list[int]:
+        """Get an action from the agent.
+
+        Args:
+            observation: The observation from the environment.
+
+        Returns:
+            The action to execute.
+
+        """
         role_name = Roles.Name(
             self.env.env_settings.pb_model.episode_settings.player_settings[0].role
         )

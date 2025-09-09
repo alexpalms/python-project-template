@@ -1,3 +1,5 @@
+"""Utils module."""
+
 from typing import Any
 
 import matplotlib.pyplot as plt
@@ -7,7 +9,15 @@ from numpy.typing import NDArray
 
 
 class TypedEnvironment:
+    """Environment that selects actions."""
+
     def __init__(self, env: Any):
+        """Initialize the environment.
+
+        Args:
+            env: The environment to use.
+
+        """
         self.diambra_env = env
         self._render_mode = self.diambra_env.render_mode
         self._fig = None
@@ -17,16 +27,32 @@ class TypedEnvironment:
             self._im: AxesImage | None = None
 
     def reset(self) -> tuple[dict[str, Any], dict[str, Any]]:
+        """Reset the environment.
+
+        Returns:
+            The observation and info.
+
+        """
         observation, info = self.diambra_env.reset()
         return observation, info
 
     def step(
         self, action: list[int]
     ) -> tuple[dict[str, Any], float, bool, bool, dict[str, Any]]:
+        """Step the environment.
+
+        Args:
+            action: The action to execute.
+
+        Returns:
+            The observation, reward, terminated, truncated, and info.
+
+        """
         observation, reward, terminated, truncated, info = self.diambra_env.step(action)
         return observation, reward, terminated, truncated, info
 
     def render(self) -> None:
+        """Render the environment."""
         if self._render_mode == "rgb_array":
             frame: NDArray[np.int_] = self.diambra_env.render()
             if self._ax is None:
@@ -42,6 +68,7 @@ class TypedEnvironment:
             plt.pause(0.001)
 
     def close(self) -> None:
+        """Close the environment."""
         self.diambra_env.close()
         if self._render_mode == "rgb_array":
             plt.close(self._fig)
