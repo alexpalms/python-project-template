@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""Diambra run script."""
+
 import argparse
 import json
 import logging
@@ -19,6 +21,13 @@ def run_diambra(
     agent_type: str,
     game_id_and_character_selection_config: dict[str, Any],
 ) -> None:
+    """Run the Diambra environment.
+
+    Args:
+        agent_type: The type of agent to use.
+        game_id_and_character_selection_config: The game ID and character selection configuration.
+
+    """
     game_id = game_id_and_character_selection_config["game_id"]
     characters = game_id_and_character_selection_config["characters"]
 

@@ -16,6 +16,9 @@ dependencies = [
     "vllm>=0.10.1.1",
 ]
 
+[options.package_data]
+text_to_fight = ["py.typed"]
+
 [tool.mypy]
 strict = true
 python_version = "3.11"
@@ -30,6 +33,9 @@ select = [
   "D", "E", "F", "UP", "I", "B", "N", "S", "A", "C4", "T20"
 ]
 ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/**/__init__.py" = ["D104", "D107"]  # ignore module and __init__ docstrings
 
 [tool.ruff.format]
 quote-style = "double"
