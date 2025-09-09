@@ -50,4 +50,28 @@ text-to-fight/
     - Define pre-commit configuration file `root/.pre-commit-config.yaml`
     - Install pre-commit hook `uv run pre-commit install`
     - Run it locally `uv run pre-commit run --all-files`
+  - CI/CD
+    - See `root/.github/workflows/type-hints-check.yaml`
+
+#### Code Formatting
+
+- Extensions:
+  - Ruff
+- Settings:
+  See settings under
+  - `.vscode/settings.json`
+  - `root/pyproject.toml`
+- Extra
+  - Local check
+    - `uv add ruff`
+    - Configurations for `ruff` in `root/pyproject.toml`
+    - Run it locally from the root with:
+      - `uv run ruff check . ` for checking
+      - `uv run ruff format --check . ` for format
+
+  - Pre-commit
+    - `uv add pre-commit`
+    - Define pre-commit configuration file `root/.pre-commit-config.yaml`
+    - Install pre-commit hook `uv run pre-commit install`
+    - Run it locally `uv run pre-commit run --all-files`
 

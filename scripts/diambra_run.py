@@ -1,33 +1,37 @@
 #!/usr/bin/env python3
-from text_to_fight.llm_chat import game_and_character_selection
-
-from vllm import LLM
-from typing import Optional
-
-import diambra.arena # type: ignore[import-untyped]
-from diambra.arena import SpaceTypes, Roles, EnvironmentSettings
-
-import json
 import argparse
+import json
+import logging
 from typing import Any
 
+import diambra.arena  # type: ignore[import-untyped]
+from diambra.arena import EnvironmentSettings, Roles, SpaceTypes
+from vllm import LLM
+
+from text_to_fight.agents import Agent, RandomAgent, RandomAgentWithCustomActions
+from text_to_fight.llm_chat import game_and_character_selection
 from text_to_fight.utils import TypedEnvironment
 
-from text_to_fight.agents import RandomAgent, Agent
-from text_to_fight.agents import RandomAgentWithCustomActions
+logging.basicConfig(level=logging.INFO)
 
-def run_diambra(agent_type: str, game_id_and_character_selection_config: dict[str, Any]) -> None:
+
+def run_diambra(
+    agent_type: str,
+    game_id_and_character_selection_config: dict[str, Any],
+) -> None:
     game_id = game_id_and_character_selection_config["game_id"]
     characters = game_id_and_character_selection_config["characters"]
 
     # Settings
     settings = EnvironmentSettings()
     settings.step_ratio = 6
-    settings.role = Roles.P1 # pyright: ignore
+    settings.role = Roles.P1  # pyright: ignore
     settings.characters = characters
-    settings.action_space = SpaceTypes.MULTI_DISCRETE # pyright: ignore
+    settings.action_space = SpaceTypes.MULTI_DISCRETE  # pyright: ignore
 
-    env = TypedEnvironment(diambra.arena.make(game_id, settings, render_mode="rgb_array")) # pyright: ignore
+    env = TypedEnvironment(
+        diambra.arena.make(game_id, settings, render_mode="rgb_array"),  # pyright: ignore
+    )
 
     agent: Agent
     if agent_type == "random":
@@ -42,7 +46,7 @@ def run_diambra(agent_type: str, game_id_and_character_selection_config: dict[st
     while True:
         env.render()
         action = agent.get_action(observation)
-        print("Action: ", action)
+        logging.info("Action: %s", action)
         observation, _, terminated, truncated, _ = env.step(action)
 
         if terminated or truncated:
@@ -52,6 +56,7 @@ def run_diambra(agent_type: str, game_id_and_character_selection_config: dict[st
     # Close the environment
     env.close()
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--agent-type", type=str, default="random")
@@ -59,9 +64,13 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Initialize the LLM
-    llm: Optional[LLM] = None
+    llm: LLM | None = None
     if args.llm == "true":
-        llm = LLM(model="unsloth/Llama-3.2-3B-Instruct-bnb-4bit", max_model_len=2000, gpu_memory_utilization=0.7)
+        llm = LLM(
+            model="unsloth/Llama-3.2-3B-Instruct-bnb-4bit",
+            max_model_len=2000,
+            gpu_memory_utilization=0.7,
+        )
 
     while True:
         if llm is not None:
@@ -69,7 +78,7 @@ if __name__ == "__main__":
         else:
             prompt_structured_output = {"game_id": "sfiii3n", "characters": ["Ryu"]}
 
-        print("Environment settings: ", prompt_structured_output)
+        logging.info("Environment settings: %s", prompt_structured_output)
         run_diambra(args.agent_type, prompt_structured_output)
         continue_answer = input("New episode? (y/[n]): ")
         if continue_answer.lower() != "y":

@@ -1,6 +1,16 @@
 {
+    // Hints (pyright)
     "editor.parameterHints.enabled": true,          // inline hint suggestions
     "editor.inlayHints.enabled": "on",               // show inferred types in editor
+    // Formatting (ruff)
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit"
+        }
+    },
+    // Python
     "python.pythonPath": ".venv/bin/python",
     "editor.tokenColorCustomizations": {
         "textMateRules": [

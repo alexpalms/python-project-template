@@ -1,10 +1,13 @@
-import random
 import json
 import os
-from typing import Any
+import random
 from abc import abstractmethod
-from diambra.arena import Roles # type: ignore[import-untyped]
+from typing import Any
+
+from diambra.arena import Roles  # type: ignore[import-untyped]
+
 from text_to_fight.utils import TypedEnvironment
+
 
 class Agent:
     @abstractmethod
@@ -15,6 +18,7 @@ class Agent:
     def get_action(self, observation: dict[str, Any]) -> list[int]:
         raise NotImplementedError
 
+
 class RandomAgent(Agent):
     def __init__(self, env: TypedEnvironment):
         self.env = env.diambra_env
@@ -23,28 +27,33 @@ class RandomAgent(Agent):
         actions: list[int] = self.env.action_space.sample()
         return actions
 
+
 class RandomAgentWithCustomActions(Agent):
     def __init__(self, env: TypedEnvironment, custom_actions: list[list[str]]):
         self.env = env.diambra_env
         # Load actions mapping from JSON file
         local_dir = os.path.dirname(os.path.abspath(__file__))
         actions_mapping_path = os.path.join(local_dir, "actions_mapping.json")
-        assert os.path.exists(actions_mapping_path), f"Actions mapping file not found: {actions_mapping_path}"
+        if not os.path.exists(actions_mapping_path):
+            raise FileNotFoundError(
+                f"Actions mapping file not found: {actions_mapping_path}"
+            )
 
-        with open(actions_mapping_path, 'r') as f:
+        with open(actions_mapping_path) as f:
             self.actions_mapping = json.load(f)
 
-        self.actions: list[list[list[list[int]]]] = [[],[]]
+        self.actions: list[list[list[list[int]]]] = [[], []]
         moves_p1 = self.actions_mapping["all"]["moves_p1"]
         moves_p2 = self.actions_mapping["all"]["moves_p2"]
         attacks = self.actions_mapping[self.env.env_settings.game_id]["attacks"]
         for custom_action in custom_actions:
-            new_action_p1: list[list[int]] = [[],[]]
-            new_action_p2: list[list[int]] = [[],[]]
+            new_action_p1: list[list[int]] = [[], []]
+            new_action_p2: list[list[int]] = [[], []]
             for action_item in custom_action:
                 if "+" in action_item:
                     action = action_item.split("+")
-                    assert action[0] in moves_p1 and action[1] in attacks, f"The custom action {action} is not valid"
+                    if not (action[0] in moves_p1 and action[1] in attacks):
+                        raise ValueError(f"The custom action {action} is not valid")
                     action_p1 = [moves_p1.index(action[0]), attacks.index(action[1])]
                     action_p2 = [moves_p2.index(action[0]), attacks.index(action[1])]
                 else:
@@ -55,7 +64,9 @@ class RandomAgentWithCustomActions(Agent):
                         action_p1 = [0, attacks.index(action_item)]
                         action_p2 = [0, attacks.index(action_item)]
                     else:
-                        assert False, f"The custom action {action_item} is not valid"
+                        raise ValueError(
+                            f"The custom action {action_item} is not valid"
+                        )
                 new_action_p1[0].append(action_p1[0])
                 new_action_p1[1].append(action_p1[1])
                 new_action_p2[0].append(action_p2[0])
@@ -65,26 +76,39 @@ class RandomAgentWithCustomActions(Agent):
 
         for i in range(2):
             for side_action_item in self.actions[i]:
-                assert len(side_action_item[0]) == len(side_action_item[1]), "The number of moves and the attacks must be the same"
+                if len(side_action_item[0]) != len(side_action_item[1]):
+                    raise ValueError(
+                        "The number of moves and the attacks must be the same"
+                    )
 
         self.executing_action = False
         self.execution_idx = 0
         self.selected_action = [[0], [0]]
 
     def get_action(self, observation: dict[str, Any]) -> list[int]:
-        role_name = Roles.Name(self.env.env_settings.pb_model.episode_settings.player_settings[0].role)
+        role_name = Roles.Name(
+            self.env.env_settings.pb_model.episode_settings.player_settings[0].role
+        )
         action_to_execute = [0, 0]
         side: int = observation[role_name]["side"]
         if not self.executing_action:
             # Randomly select an action from the list of actions
-            self.selected_action = self.actions[side][random.randint(0, len(self.actions[side]) - 1)]
+            self.selected_action = self.actions[side][
+                random.randint(0, len(self.actions[side]) - 1)  # noqa: S311
+            ]
 
             if len(self.selected_action[0]) > 1:
                 self.executing_action = True
-            action_to_execute = [self.selected_action[0][self.execution_idx], self.selected_action[1][self.execution_idx]]
+            action_to_execute = [
+                self.selected_action[0][self.execution_idx],
+                self.selected_action[1][self.execution_idx],
+            ]
         else:
             self.execution_idx += 1
-            action_to_execute = [self.selected_action[0][self.execution_idx], self.selected_action[1][self.execution_idx]]
+            action_to_execute = [
+                self.selected_action[0][self.execution_idx],
+                self.selected_action[1][self.execution_idx],
+            ]
             if self.execution_idx == (len(self.selected_action[0]) - 1):
                 self.executing_action = False
                 self.execution_idx = 0
