@@ -1,9 +1,9 @@
 """Agents module."""
 
 import json
-import os
 import random
 from abc import abstractmethod
+from importlib import resources
 from typing import Any
 
 from diambra.arena import Roles  # type: ignore[import-untyped]
@@ -76,16 +76,15 @@ class RandomAgentWithCustomActions(Agent):
 
         """
         self.env = env.diambra_env
-        # Load actions mapping from JSON file
-        local_dir = os.path.dirname(os.path.abspath(__file__))
-        actions_mapping_path = os.path.join(local_dir, "actions_mapping.json")
-        if not os.path.exists(actions_mapping_path):
-            raise FileNotFoundError(
-                f"Actions mapping file not found: {actions_mapping_path}"
-            )
-
-        with open(actions_mapping_path) as f:
-            self.actions_mapping = json.load(f)
+        try:
+            with (
+                resources.files("text_to_fight.data")
+                .joinpath("actions_mapping.json")
+                .open() as f
+            ):
+                self.actions_mapping = json.load(f)
+        except FileNotFoundError:
+            raise FileNotFoundError("Actions mapping file not found") from None
 
         self.actions: list[list[list[list[int]]]] = [[], []]
         moves_p1 = self.actions_mapping["all"]["moves_p1"]
