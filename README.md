@@ -3,6 +3,8 @@
 
 ### Code quality
 
+[![codecov](https://codecov.io/github/alexpalms/text-to-fight/graph/badge.svg?token=4817P3HFDN)](https://codecov.io/github/alexpalms/text-to-fight)
+
 #### Package structure
 
 - Scheme:
@@ -85,9 +87,10 @@ text-to-fight/
   - `.vscode/settings.json`
 - Extra
   - Local check
-    - `uv add pytest`
-    - Configurations for `ruff` in `.vscode/settings.json`
+    - `uv add pytest pytest-cov`
+    - Configurations for `pytest` in `.vscode/settings.json`
     - Run it locally from the root with:
-      - `uv run pytest
+      - `uv run pytest`
+      - `uv run pytest --cov=text_to_fight --cov-report=term-missing --cov-report=xml`
   - CI/CD
     - See `root/.github/workflows/pytest.yaml`
