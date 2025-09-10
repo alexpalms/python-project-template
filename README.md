@@ -79,15 +79,15 @@ text-to-fight/
 - Extra
   - Local check
     - `pyright`
-      - `uv add pyright`
+      - `uv add --group dev pyright`
       - Configurations for `pyright` in `root/pyrightconfig.json`
       - Run it locally from the root with `uv run pyright`
     - `mypy`
-      - `uv add mypy`
+      - `uv add --group dev mypy`
       - Configurations for `mypy` in `root/pyprojects.toml`
       - Run it locally from the root with `uv run mypy`
   - Pre-commit
-    - `uv add pre-commit`
+    - `uv add --group dev pre-commit`
     - Define pre-commit configuration file `root/.pre-commit-config.yaml`
     - Install pre-commit hook `uv run pre-commit install`
     - Run it locally `uv run pre-commit run --all-files`
@@ -104,7 +104,7 @@ text-to-fight/
   - `root/pyproject.toml`
 - Extra
   - Local check
-    - `uv add ruff`
+    - `uv add --group dev ruff`
     - Configurations for `ruff` in `root/pyproject.toml`
     - Run it locally from the root with:
       - `uv run ruff check . ` for checking
@@ -126,7 +126,7 @@ text-to-fight/
   - `.vscode/settings.json`
 - Extra
   - Local check
-    - `uv add pytest pytest-cov`
+    - `uv add --group dev pytest pytest-cov`
     - Configurations for `pytest` in `.vscode/settings.json`
     - Run it locally from the root with:
       - `uv run pytest`
