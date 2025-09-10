@@ -68,10 +68,26 @@ text-to-fight/
     - Run it locally from the root with:
       - `uv run ruff check . ` for checking
       - `uv run ruff format --check . ` for format
-
   - Pre-commit
     - `uv add pre-commit`
     - Define pre-commit configuration file `root/.pre-commit-config.yaml`
     - Install pre-commit hook `uv run pre-commit install`
     - Run it locally `uv run pre-commit run --all-files`
+  - CI/CD
+    - See `root/.github/workflows/code-formatting-check.yaml`
 
+#### Testing
+
+- Extensions:
+  - Python
+- Settings:
+  See settings under
+  - `.vscode/settings.json`
+- Extra
+  - Local check
+    - `uv add pytest`
+    - Configurations for `ruff` in `.vscode/settings.json`
+    - Run it locally from the root with:
+      - `uv run pytest
+  - CI/CD
+    - See `root/.github/workflows/pytest.yaml`

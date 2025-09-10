@@ -12,6 +12,8 @@ dependencies = [
     "mypy>=1.17.1",
     "pre-commit>=4.3.0",
     "pyright>=1.1.405",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
     "ruff>=0.12.12",
     "vllm>=0.10.1.1",
 ]
@@ -22,7 +24,7 @@ text_to_fight = ["py.typed"]
 [tool.mypy]
 strict = true
 python_version = "3.11"
-files = ["src", "scripts"]#, "tests"]
+files = ["src", "scripts", "tests"]
 
 [tool.ruff]
 line-length = 88
