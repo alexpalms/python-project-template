@@ -23,9 +23,12 @@ def run_diambra(
 ) -> None:
     """Run the Diambra environment.
 
-    Args:
-        agent_type: The type of agent to use.
-        game_id_and_character_selection_config: The game ID and character selection configuration.
+    Parameters
+    ----------
+        agent_type : str
+            The type of agent to use.
+        game_id_and_character_selection_config : dict[str, Any]
+            The game ID and character selection configuration.
 
     """
     game_id = game_id_and_character_selection_config["game_id"]

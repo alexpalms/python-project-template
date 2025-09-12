@@ -37,8 +37,6 @@
 
 ### Code quality
 
-
-
 #### Package structure
 
 - Scheme:
@@ -48,6 +46,14 @@ text-to-fight/
 ├── docker/
 │   └── Dockerfile
 │   └── entrypoint.sh
+├── docs/
+│   └── build/
+│   └── source/
+│       └── _static/
+│       └── _templates/
+│       └── conf.py
+│       └── index.rst
+│   └── Makefile
 ├── examples/
 │   └── example_1.py
 ├── src/
@@ -55,8 +61,7 @@ text-to-fight/
 │       ├── __init__.py
 │       ├── llm_chat.py
 │       └── agents.py
-├── scripts/
-│   └── diambra_run.py
+│       └── cli.py
 ├── tests/
 │   └── __init__.py
 ├── requirements.txt   # optional, for legacy pip users
@@ -133,3 +138,13 @@ text-to-fight/
       - `uv run pytest --cov=text_to_fight --cov-report=term-missing --cov-report=xml`
   - CI/CD
     - See `root/.github/workflows/pytest.yaml`
+    - Code coverage:
+      - Managed via: https://app.codecov.io/
+      - Settings in `codecov.yaml` and docs available at https://docs.codecov.com/docs/common-recipe-list
+
+### Docs
+
+- `uv add --group docs sphinx furo sphinx-autodoc-typehints myst-parser`
+- from the repo root `uv run sphinx-quickstart docs`
+- from the repo root `uv run sphinx-apidoc -o docs/source/ src/text_to_fight --separate`
+- from inside `docs` run `uv run make html`

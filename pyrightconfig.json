@@ -1,6 +1,6 @@
 {
     //"python.analysis.typeCheckingMode": "strict",   // enforce strict typing
-    "include": ["src", "scripts", "tests"],
+    "include": ["src", "examples", "tests", "docs"],
     "typeCheckingMode": "strict",
     "reportUnusedVariable": "error",
     "reportMissingImports": "error",

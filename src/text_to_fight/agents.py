@@ -12,26 +12,31 @@ from text_to_fight.utils import TypedEnvironment
 
 
 class Agent:
-    """Agent that selects actions."""
+    """Agent that selects actions.
+
+    Parameters
+    ----------
+    env : TypedEnvironment
+        The environment to use.
+
+    """
 
     @abstractmethod
     def __init__(self, env: TypedEnvironment) -> None:
-        """Initialize the agent.
-
-        Args:
-            env: The environment to use.
-
-        """
         raise NotImplementedError
 
     @abstractmethod
     def get_action(self, observation: dict[str, Any]) -> list[int]:
         """Get an action from the agent.
 
-        Args:
-            observation: The observation from the environment.
+        Parameters
+        ----------
+        observation : dict[str, Any]
+            The observation from the environment.
 
-        Returns:
+        Returns
+        -------
+        list[int]
             The action to execute.
 
         """
@@ -39,24 +44,28 @@ class Agent:
 
 
 class RandomAgent(Agent):
-    """Agent that selects random actions."""
+    """Agent that selects random actions.
+
+    Args:
+        env: TypedEnvironment
+        The environment to use.
+
+    """
 
     def __init__(self, env: TypedEnvironment):
-        """Initialize the agent.
-
-        Args:
-            env: The environment to use.
-
-        """
         self.env = env.diambra_env
 
     def get_action(self, observation: dict[str, Any]) -> list[int]:
         """Get an action from the agent.
 
-        Args:
-            observation: The observation from the environment.
+        Parameters
+        ----------
+        observation: dict[str, Any]
+            The observation from the environment.
 
-        Returns:
+        Returns
+        -------
+        list[int]
             The action to execute.
 
         """
@@ -65,16 +74,16 @@ class RandomAgent(Agent):
 
 
 class RandomAgentWithCustomActions(Agent):
-    """Agent that selects actions from a list of custom actions."""
+    """Agent that selects actions from a list of custom actions.
+
+    Parameters
+    ----------
+    env: The environment to use.
+    custom_actions: The list of custom actions to use.
+
+    """
 
     def __init__(self, env: TypedEnvironment, custom_actions: list[list[str]]):
-        """Initialize the agent.
-
-        Args:
-            env: The environment to use.
-            custom_actions: The list of custom actions to use.
-
-        """
         self.env = env.diambra_env
         try:
             with (
@@ -132,10 +141,14 @@ class RandomAgentWithCustomActions(Agent):
     def get_action(self, observation: dict[str, Any]) -> list[int]:
         """Get an action from the agent.
 
-        Args:
-            observation: The observation from the environment.
+        Parameters
+        ----------
+        observation: dict[str, Any]
+            The observation from the environment.
 
-        Returns:
+        Returns
+        -------
+        list[int]
             The action to execute.
 
         """

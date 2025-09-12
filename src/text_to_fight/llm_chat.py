@@ -23,12 +23,18 @@ class GameAndCharacterSelection(BaseModel):
 def llm_generate(llm: LLM, prompt: str, output_model: type[BaseModel]) -> str:
     """Generate a response from the LLM.
 
-    Args:
-        llm: The LLM to use.
-        prompt: The prompt to generate a response from.
-        output_model: The model to use for the output.
+    Parameters
+    ----------
+        llm : LLM
+             The LLM to use.
+        prompt : str
+            The prompt to generate a response from.
+        output_model : type[BaseModel]
+            The model to use for the output.
 
-    Returns:
+    Returns
+    -------
+    str
         The response from the LLM.
 
     """
@@ -46,10 +52,14 @@ def llm_generate(llm: LLM, prompt: str, output_model: type[BaseModel]) -> str:
 def game_and_character_selection(llm: LLM) -> str:
     """Generate a response from the LLM for the game and character selection.
 
-    Args:
-        llm: The LLM to use.
+    Parameters
+    ----------
+        llm : LLM
+            The LLM to use.
 
-    Returns:
+    Returns
+    -------
+    str
         The response from the LLM.
 
     """
@@ -95,11 +105,16 @@ class ActionsSelection(BaseModel):
 def actions_selection(llm: LLM, game_id: str) -> str:
     """Generate a response from the LLM for the actions selection.
 
-    Args:
-        llm: The LLM to use.
-        game_id: The game ID.
+    Parameters
+    ----------
+        llm : LLM
+            The LLM to use.
+        game_id : str
+            The game ID.
 
-    Returns:
+    Returns
+    -------
+    str
         The response from the LLM.
 
     """

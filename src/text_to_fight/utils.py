@@ -9,15 +9,16 @@ from numpy.typing import NDArray
 
 
 class TypedEnvironment:
-    """Environment that selects actions."""
+    """Environment that selects actions.
+
+    Parameters
+    ----------
+    env : Any
+        The environment to use.
+
+    """
 
     def __init__(self, env: Any):
-        """Initialize the environment.
-
-        Args:
-            env: The environment to use.
-
-        """
         self.diambra_env = env
         self._render_mode = self.diambra_env.render_mode
         self._fig = None
@@ -29,8 +30,12 @@ class TypedEnvironment:
     def reset(self) -> tuple[dict[str, Any], dict[str, Any]]:
         """Reset the environment.
 
-        Returns:
-            The observation and info.
+        Returns
+        -------
+        observation : dict[str, Any]
+            The observation.
+        info : dict[str, Any]
+            The info.
 
         """
         observation, info = self.diambra_env.reset()
@@ -41,11 +46,23 @@ class TypedEnvironment:
     ) -> tuple[dict[str, Any], float, bool, bool, dict[str, Any]]:
         """Step the environment.
 
-        Args:
+        Parameters
+        ----------
+        action : list[int]
             action: The action to execute.
 
-        Returns:
-            The observation, reward, terminated, truncated, and info.
+        Returns
+        -------
+        observation : dict[str, Any]
+            The observation.
+        reward : float
+            The reward.
+        terminated : bool
+            Whether the episode has terminated.
+        truncated : bool
+            Whether the episode has truncated.
+        info : dict[str, Any]
+            The info.
 
         """
         observation, reward, terminated, truncated, info = self.diambra_env.step(action)
