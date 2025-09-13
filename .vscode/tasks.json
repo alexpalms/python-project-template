@@ -49,6 +49,13 @@
         "command": "uv run pre-commit run --all-files",
         "group": "none",
         "problemMatcher": []
+      },
+      {
+        "label": "Pytest",
+        "type": "shell",
+        "command": "uv run pytest",
+        "group": "none",
+        "problemMatcher": []
       }
     ]
 }

@@ -1,5 +1,4 @@
-# text-to-fight
-
+# Python Project Template
 
 ### Badges
 
@@ -34,6 +33,12 @@
 
 ![License](https://img.shields.io/github/license/alexpalms/text-to-fight)
 
+### Dev environment setup
+
+- Install `uv` ([Ref](https://github.com/astral-sh/uv))
+  - `pip install uv` in the general python environment (not inside virtual envs)
+  - Add `export PATH="$HOME/.local/bin:$PATH"` to `~/.bashrc`
+- Install package with dependencies `uv pip install -e .`
 
 ### Code quality
 
@@ -41,8 +46,27 @@
 
 - Scheme:
 ```
-text-to-fight/
+python-project-template/
 ├── pyproject.toml
+├── pyrightconfig.json
+├── codecov.json
+├── .github/
+│   └── ISSUE_TEMPLATE/
+│       └── bug_report.md
+│       └── config.yaml
+│       └── feature_request.md
+│   └── PULL_REQUEST_TEMPLATE.md
+│   └── workflows/
+│       └── code-formatting-check.yaml
+│       └── pytest.yaml
+│       └── type-hints-check.yaml
+├── .vscode/
+│   └── launch.json
+│   └── settings.json
+│   └── tasks.json
+├── .pre-commit-config.yaml
+├── LICENSE
+├── .gitignore
 ├── docker/
 │   └── Dockerfile
 │   └── entrypoint.sh
@@ -50,6 +74,7 @@ text-to-fight/
 │   └── build/
 │   └── source/
 │       └── _static/
+│           └── favicon.ico
 │       └── _templates/
 │       └── conf.py
 │       └── index.rst
@@ -57,20 +82,16 @@ text-to-fight/
 ├── examples/
 │   └── example_1.py
 ├── src/
-│   └── text_to_fight/
+│   └── project_name/
 │       ├── __init__.py
-│       ├── llm_chat.py
 │       └── agents.py
+│       └── utils.py
 │       └── cli.py
 ├── tests/
-│   └── __init__.py
+│   └── test_agents.py
 ├── requirements.txt   # optional, for legacy pip users
 
 ```
-
-- Install `uv` ([Ref](https://github.com/astral-sh/uv))
-  - `pip install uv` in the general python environment (not inside virtual envs)
-  - Add `export PATH="$HOME/.local/bin:$PATH"` to `~/.bashrc`
 
 #### Type Hints
 

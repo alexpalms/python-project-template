@@ -3,8 +3,8 @@
 
 from gymnasium.spaces import MultiDiscrete
 
-from text_to_fight.agents import RandomAgent
-from text_to_fight.utils import TypedEnvironment
+from project_name.agents import RandomAgent
+from project_name.utils import TypedEnvironment
 
 
 class DummyEnv:

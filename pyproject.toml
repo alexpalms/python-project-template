@@ -1,16 +1,13 @@
 [project]
-name = "text-to-fight"
+name = "project-name"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 # Added with `uv add package_name`
 dependencies = [
-    "bitsandbytes>=0.47.0",
-    "diambra>=0.0.20",
-    "diambra-arena>=2.2.7",
-    "matplotlib>=3.10.6",
-    "vllm>=0.10.1.1",
+    "setuptools>=80.9.0",
+    "vizdoom>=1.2.4",
 ]
 
 # Added with `uv add --group dev package_name`
@@ -34,7 +31,7 @@ docs = [
 include-package-data = true
 
 [tool.setuptools.package-data]
-text_to_fight = ["py.typed", "data/*"]
+project_name = ["py.typed", "data/*"]
 
 [tool.mypy]
 strict = true

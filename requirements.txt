@@ -1,6 +1,11 @@
-diambra
-diambra-arena
-llvm
-bitsandbytes
+pyright
 mypy
 pre-commit
+pytest
+pytest-cov
+ruff
+sphinx
+sphinx-autodoc-typehints
+furo
+myst-parser
+vizdoom

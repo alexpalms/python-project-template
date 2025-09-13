@@ -9,5 +9,4 @@
     "reportUntypedFunctionDecorator": "error",
     "reportUntypedFunctionCall": "error",
     "reportMissingTypeStubs": "none"
-
 }
