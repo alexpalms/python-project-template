@@ -52,7 +52,8 @@ def run_vizdoom(
     env.close()
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Run the CLI."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--agent-type", type=str, default="random")
     args = parser.parse_args()
@@ -63,3 +64,7 @@ if __name__ == "__main__":
         continue_answer = input("New episode? (y/[n]): ")
         if continue_answer.lower() != "y":
             break
+
+
+if __name__ == "__main__":
+    main()
