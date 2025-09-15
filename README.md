@@ -6,18 +6,18 @@
 <a href="https://alexpalms.github.io/"><img src="https://img.shields.io/badge/Blog-Read%20Post-blue" alt="Blog Post"/></a>
 <a href="https://artificialtwin.com/"><img src="https://img.shields.io/badge/Project-View%20Page-gold" alt="Company Project"/></a>
 
-<a href="https://github.com/alexpalms/text-to-fight/actions/workflows/code-formatting-check.yaml"><img src="https://github.com/alexpalms/text-to-fight/actions/workflows/code-formatting-check.yaml?label=code%20formatting&logo=github" alt="Code Formatting"/></a>
+<a href="https://github.com/alexpalms/python-project-template/actions/workflows/code-formatting-check.yaml"><img src="https://github.com/alexpalms/python-project-template/actions/workflows/code-formatting-check.yaml?label=code%20formatting&logo=github" alt="Code Formatting"/></a>
 <a href="https://github.com/diambra/arena/actions/workflows/test_agents.yaml"><img src="https://img.shields.io/github/actions/workflow/status/diambra/arena/test_agents.yaml?label=agents%20tests&logo=github" alt="Agents Test"/></a>
 
 <a href="https://github.com/diambra/arena/tags"><img src="https://img.shields.io/github/v/tag/diambra/arena?label=latest%20tag&logo=github" alt="Latest Tag"/></a>
 <a href="https://pypi.org/project/diambra-arena/"><img src="https://img.shields.io/pypi/v/diambra-arena?logo=pypi" alt="Pypi version"/></a>
 
-<a href="https://github.com/alexpalms/text-to-fight"><img src="https://img.shields.io/badge/supported%20os-linux%20%7C%20win%20%7C%20macOS-blue?logo=docker" alt="Supported OS"/></a>
+<a href="https://github.com/alexpalms/python-project-template"><img src="https://img.shields.io/badge/supported%20os-linux%20%7C%20win%20%7C%20macOS-blue?logo=docker" alt="Supported OS"/></a>
 
-<a href="https://github.com/alexpalms/text-to-fight"><img src="https://img.shields.io/github/last-commit/alexpalms/text-to-fight/main?label=repo%20latest%20update&logo=readthedocs" alt="Latest Repo Update"/></a>
+<a href="https://github.com/alexpalms/python-project-template"><img src="https://img.shields.io/github/last-commit/alexpalms/python-project-template/main?label=repo%20latest%20update&logo=readthedocs" alt="Latest Repo Update"/></a>
 
 
-[![codecov](https://codecov.io/github/alexpalms/text-to-fight/graph/badge.svg?token=4817P3HFDN)](https://codecov.io/github/alexpalms/text-to-fight)
+[![codecov](https://codecov.io/github/alexpalms/python-project-template/graph/badge.svg?token=4817P3HFDN)](https://codecov.io/github/alexpalms/python-project-template)
 
 
 ![Ruff](https://img.shields.io/badge/linting-ruff-4B8BBE?logo=python&logoColor=white)
@@ -31,7 +31,7 @@
 ![Docker Image Version](https://img.shields.io/docker/v/diambra/engine?sort=semver)
 
 
-![License](https://img.shields.io/github/license/alexpalms/text-to-fight)
+![License](https://img.shields.io/github/license/alexpalms/python-project-template)
 
 ### Dev environment setup
 

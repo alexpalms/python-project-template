@@ -28,10 +28,10 @@ jobs:
         run: uv venv
 
       - name: Install package
-        run: uv pip install -e .[dev]
+        run: uv pip install -e . --group dev
 
       - name: Run pytest
-        run: uv run pytest --cov=text_to_fight --cov-report=term-missing --cov-report=xml
+        run: uv run pytest --cov=project-name --cov-report=term-missing --cov-report=xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
