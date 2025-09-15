@@ -1,4 +1,4 @@
-Welcome to Text-To-Fight’s Documentation
+Welcome to Project Name’s Documentation
 ========================================
 
 - `Hyperlink 1 <https://conda.io/docs/user-guide/install/windows.html>`_
@@ -26,4 +26,3 @@ For a quick start you can move straight to installing Stable-Baselines3 in the n
 
    API/module_1
    API/module_2
-   API/module_3

@@ -165,7 +165,9 @@ python-project-template/
 
 ### Docs
 
-- `uv add --group docs sphinx furo sphinx-autodoc-typehints myst-parser`
+- `uv add --group docs sphinx furo sphinx-autodoc-typehints myst-parser sphinx-autobuild`
 - from the repo root `uv run sphinx-quickstart docs`
-- from the repo root `uv run sphinx-apidoc -o docs/source/ src/text_to_fight --separate`
-- from inside `docs` run `uv run make html`
+- from the repo root `uv run sphinx-apidoc -o docs/source/ src/project_name --separate`
+- For building:
+  - With autobuild: from repo root run `sphinx-autobuild docs/source docs/build/html`
+  - Manually: from inside `docs` run `uv run make html`

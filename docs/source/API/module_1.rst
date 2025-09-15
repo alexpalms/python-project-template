@@ -1,6 +1,6 @@
 Agents
 ======
 
-.. automodule:: text_to_fight.agents
+.. automodule:: project_name.agents
    :members:
    :show-inheritance:

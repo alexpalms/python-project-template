@@ -1,7 +1,7 @@
-LLM Chat
-========
+Utils
+=====
 
-.. automodule:: text_to_fight.llm_chat
+.. automodule:: project_name.utils
    :members:
    :show-inheritance:
    :undoc-members:
