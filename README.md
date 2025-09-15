@@ -37,7 +37,7 @@ This repository serves as a template for Python projects, designed to streamline
 ![Docker Image Version](https://img.shields.io/docker/v/diambra/engine?sort=semver)
 ![Docker Pulls](https://img.shields.io/docker/pulls/diambra/engine)
 
-![License](https://img.shields.io/github/license/alexpalms/python-project-template)
+![License](https://img.shields.io/github/license/alexpalms/python-project-template?cacheBust=1)
 
 ### Dev environment setup
 
