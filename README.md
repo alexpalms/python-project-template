@@ -178,3 +178,17 @@ python-project-template/
 - For building:
   - With autobuild: from repo root run `uv run sphinx-autobuild docs/source docs/build/html`
   - Manually: from inside `docs` run `uv run make html`
+
+
+### Packaging
+
+- Build package with `uv build`
+- Check package locally using twine:
+  - Install with `uv add --group dev twine`
+  - Run it with `uv run twine check dist/*`
+- Test locally from build wheel: `uv pip install dist/project_name-0.1.0-py3-none-any.whl`
+- Push to Pypi registry:
+  - Test:
+    - `uv publish --repository testpypi`
+    - `uv pip install --index-url https://test.pypi.org/simple/ my-package`
+  - Official: `uv publish`
