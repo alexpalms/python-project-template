@@ -169,5 +169,5 @@ python-project-template/
 - from the repo root `uv run sphinx-quickstart docs`
 - from the repo root `uv run sphinx-apidoc -o docs/source/ src/project_name --separate`
 - For building:
-  - With autobuild: from repo root run `sphinx-autobuild docs/source docs/build/html`
+  - With autobuild: from repo root run `uv run sphinx-autobuild docs/source docs/build/html`
   - Manually: from inside `docs` run `uv run make html`

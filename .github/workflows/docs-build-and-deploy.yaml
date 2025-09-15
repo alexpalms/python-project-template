@@ -31,7 +31,7 @@ jobs:
 
       - name: Build documentation
         run: |
-          make -C docs html
+          uv run make -C docs html
 
       - name: Upload built docs as artifact
         uses: actions/upload-pages-artifact@v3
