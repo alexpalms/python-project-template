@@ -11,7 +11,7 @@
       {
         "label": "Type Hints Checks - Mypy",
         "type": "shell",
-        "command": "uv run mypy",
+        "command": "uv run mypy --strict",
         "group": "none",
         "problemMatcher": []
       },
