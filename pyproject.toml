@@ -5,8 +5,19 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "project-name"
 version = "0.1.0"
+keywords = ["keyword1", "keyword2"]
+maintainers = [
+  { name="name1", email="name1@domain.ext" },
+  { name="name2", email="name2@domain.ext" },
+]
+authors = [
+  { name="name1", email="name1@domain.ext" },
+  { name="name2", email="name2@domain.ext" },
+]
 description = "Add your description here"
-readme = "README.md"
+readme = { file = "README.md", content-type = "text/markdown"}
+license = { text = "MIT" }
+
 requires-python = ">=3.11"
 # Added with `uv add package_name`
 dependencies = [
@@ -32,6 +43,10 @@ docs = [
     "sphinx-autodoc-typehints>=3.2.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/alexpalms/python-project-template"
+Issues = "https://github.com/alexpalms/python-project-template/issues"
+
 [tool.setuptools]
 include-package-data = true
 
@@ -40,6 +55,17 @@ project_name = ["py.typed", "data/*"]
 
 [project.scripts]
 project-name-cli = "project_name.cli:main"
+
+[tool.pyright]
+include = ["src", "examples", "tests", "docs"]
+typeCheckingMode = "strict"
+reportUnusedVariable = "error"
+reportMissingImports = "error"
+reportMissingParameterType = "error"
+reportMissingTypeArgument = "error"
+reportUntypedFunctionDecorator = "error"
+reportUntypedFunctionCall = "error"
+reportMissingTypeStubs = "none"
 
 [tool.mypy]
 strict = true

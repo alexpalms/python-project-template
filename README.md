@@ -8,9 +8,9 @@ This repository serves as a template for Python projects, designed to streamline
 <a href="https://alexpalms.github.io/"><img src="https://img.shields.io/badge/blog-read%20post-blue" alt="Blog Post"/></a>
 <a href="https://artificialtwin.com/"><img src="https://img.shields.io/badge/project-view%20page-gold" alt="Company Project"/></a>
 
-<a href="https://github.com/diambra/arena/actions/workflows/type-hints-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/type-hints-check.yaml?label=type%20hints&logo=github" alt="Type Hints"/></a>
-<a href="https://github.com/diambra/arena/actions/workflows/code-formatting-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/code-formatting-check.yaml?label=code%20formatting&logo=github" alt="Code Formatting"/></a>
-<a href="https://github.com/diambra/arena/actions/workflows/pytest.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/pytest.yaml?label=pytest&logo=github" alt="Pytest"/></a>
+<a href="https://github.com/alexpalms/python-project-template/actions/workflows/type-hints-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/type-hints-check.yaml?label=type%20hints&logo=github" alt="Type Hints"/></a>
+<a href="https://github.com/alexpalms/python-project-template/actions/workflows/code-formatting-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/code-formatting-check.yaml?label=code%20formatting&logo=github" alt="Code Formatting"/></a>
+<a href="https://github.com/alexpalms/python-project-template/actions/workflows/pytest.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/pytest.yaml?label=pytest&logo=github" alt="Pytest"/></a>
 
 
 <a href="https://github.com/diambra/arena/tags"><img src="https://img.shields.io/github/v/tag/diambra/arena?label=latest%20tag&logo=github" alt="Latest Tag"/></a>
