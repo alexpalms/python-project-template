@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 RUN uv venv
 RUN uv pip install -e . --group dev

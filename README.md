@@ -41,9 +41,7 @@ This repository serves as a template for Python projects, designed to streamline
 
 ### Dev environment setup
 
-- Install `uv` ([Ref](https://github.com/astral-sh/uv))
-  - `pip install uv` in the general python environment (not inside virtual envs)
-  - Add `export PATH="$HOME/.local/bin:$PATH"` to `~/.bashrc`
+- Install `uv` ([Ref](https://github.com/astral-sh/uv)) (E.g. `curl -LsSf https://astral.sh/uv/install.sh | sh`)
 - Install package with dependencies `uv pip install -e .`
 - Install package with group dependencies `uv pip install -e . --group dev`
 
