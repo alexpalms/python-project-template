@@ -19,4 +19,4 @@ def test_random_agent() -> None:
     env = TypedEnvironment(DummyEnv())
     agent = RandomAgent(env)
     action = agent.get_action({})
-    assert action[0] in [0, 1] and action[1] in [0, 1]  # noqa: S101
+    assert action[0] in [0, 1] and action[1] in [0, 1]
