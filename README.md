@@ -41,8 +41,9 @@ This repository serves as a template for Python projects, designed to streamline
 ### Dev environment setup
 
 - Install `uv` ([Ref](https://github.com/astral-sh/uv)) (E.g. `curl -LsSf https://astral.sh/uv/install.sh | sh`)
-- Install package with dependencies `uv pip install -e .`
-- Install package with group dependencies `uv pip install -e . --group dev`
+- Create a new virtual Python environment: `uv venv`
+- Install package `uv pip install -e .`
+- (Optional) Install package with group dependencies `uv pip install -e . --group dev`
 
 ### Code quality
 
