@@ -28,7 +28,6 @@ This repository serves as a template for Python projects, designed to streamline
 
 
 ![Ruff](https://img.shields.io/badge/linting-ruff-4B8BBE?logo=python&logoColor=white)
-![mypy](https://img.shields.io/badge/type%20checking-mypy-2A6DB0?logo=python&logoColor=white)
 ![pytest](https://img.shields.io/badge/testing-pytest-2A6DB0?logo=python&logoColor=white)
 
 ![Python Versions](https://img.shields.io/pypi/pyversions/diambra-arena)
@@ -53,7 +52,6 @@ This repository serves as a template for Python projects, designed to streamline
 ```
 python-project-template/
 ├── pyproject.toml
-├── pyrightconfig.json
 ├── codecov.json
 ├── .github/
 │   └── ISSUE_TEMPLATE/
@@ -63,6 +61,8 @@ python-project-template/
 │   └── PULL_REQUEST_TEMPLATE.md
 │   └── workflows/
 │       └── code-formatting-check.yaml
+│       └── docs-build-and-deploy.yaml
+│       └── package-pubilsh.yaml
 │       └── pytest.yaml
 │       └── type-hints-check.yaml
 ├── .vscode/
@@ -94,7 +94,6 @@ python-project-template/
 │       └── cli.py
 ├── tests/
 │   └── test_agents.py
-├── requirements.txt   # optional, for legacy pip users
 
 ```
 
@@ -102,28 +101,23 @@ python-project-template/
 
 - Extensions:
   - Python / Pylance (`ms-python.vscode-pylance`)
-  - mypy
 - Settings:
-  See settings under
-  - `.vscode/settings.json`
-  - `root/pyrightconfig.json`
+  See settings under:
+  - [`.vscode/settings.json`](.vscode/settings.json)
+  - [`./pyproject.toml`](./pyproject.toml)
 - Extra
   - Local check
     - `pyright`
       - `uv add --group dev pyright`
-      - Configurations for `pyright` in `root/pyrightconfig.json`
+      - Configurations for `pyright` in [`./pyproject.toml`](./pyproject.toml)
       - Run it locally from the root with `uv run pyright`
-    - `mypy`
-      - `uv add --group dev mypy`
-      - Configurations for `mypy` in `root/pyprojects.toml`
-      - Run it locally from the root with `uv run mypy`
   - Pre-commit
     - `uv add --group dev pre-commit`
-    - Define pre-commit configuration file `root/.pre-commit-config.yaml`
+    - Define pre-commit configuration file [`.pre-commit-config.yaml`](.pre-commit-config.yaml)
     - Install pre-commit hook `uv run pre-commit install`
     - Run it locally `uv run pre-commit run --all-files`
   - CI/CD
-    - See `root/.github/workflows/type-hints-check.yaml`
+    - See [`.github/workflows/type-hints-check.yaml`](.github/workflows/type-hints-check.yaml)
 
 #### Code Formatting
 
@@ -131,12 +125,12 @@ python-project-template/
   - Ruff
 - Settings:
   See settings under
-  - `.vscode/settings.json`
-  - `root/pyproject.toml`
+  - [`.vscode/settings.json`](.vscode/settings.json)
+  - [`./pyproject.toml`](./pyproject.toml)
 - Extra
   - Local check
     - `uv add --group dev ruff`
-    - Configurations for `ruff` in `root/pyproject.toml`
+    - Configurations for `ruff` in [`./pyproject.toml`](./pyproject.toml)
     - Run it locally from the root with:
       - `uv run ruff check . ` for checking
       - `uv run ruff format --check . ` for format
@@ -146,7 +140,7 @@ python-project-template/
     - Install pre-commit hook `uv run pre-commit install`
     - Run it locally `uv run pre-commit run --all-files`
   - CI/CD
-    - See `root/.github/workflows/code-formatting-check.yaml`
+    - See [`.github/workflows/code-formatting-check.yaml`](.github/workflows/code-formatting-check.yaml)
 
 #### Testing
 
@@ -154,16 +148,16 @@ python-project-template/
   - Python
 - Settings:
   See settings under
-  - `.vscode/settings.json`
+  - [`.vscode/settings.json`](.vscode/settings.json)
 - Extra
   - Local check
     - `uv add --group dev pytest pytest-cov`
-    - Configurations for `pytest` in `.vscode/settings.json`
+    - Configurations for `pytest` in [`.vscode/settings.json`](.vscode/settings.json)
     - Run it locally from the root with:
       - `uv run pytest`
       - `uv run pytest --cov=text_to_fight --cov-report=term-missing --cov-report=xml`
   - CI/CD
-    - See `root/.github/workflows/pytest.yaml`
+    - See [`.github/workflows/pytest.yaml`](.github/workflows/pytest.yaml)
     - Code coverage:
       - Managed via: https://app.codecov.io/
       - Settings in `codecov.yaml` and docs available at https://docs.codecov.com/docs/common-recipe-list
@@ -190,3 +184,5 @@ python-project-template/
     - `uv publish --repository testpypi`
     - `uv pip install --index-url https://test.pypi.org/simple/ my-package`
   - Official: `uv publish`
+- CI/CD
+  - See [`.github/workflows/package-publish.yaml`](.github/workflows/package-publish.yaml)
