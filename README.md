@@ -38,12 +38,14 @@ This repository serves as a template for Python projects, designed to streamline
 
 ![License](https://img.shields.io/github/license/alexpalms/python-project-template?cacheBust=1)
 
-### Dev environment setup
+### Package installation
 
 - Install `uv` ([Ref](https://github.com/astral-sh/uv)) (E.g. `curl -LsSf https://astral.sh/uv/install.sh | sh`)
-- Create a new virtual Python environment: `uv venv`
-- Install package `uv pip install -e .`
-- (Optional) Install package with group dependencies `uv pip install -e . --group dev`
+- Install package:
+  - Dev default (automatically includes `dev` packages and `editable` mode): `uv sync`
+  - Editable Only - No Dev Deps: `uv sync --no-dev`
+  - Dev Deps Only - Not Editable: `uv sync --no-editable`
+  - Production Like (No Dev Deps, Not Editable): `uv sync --no-dev --no-editable`
 
 ### Code quality
 
