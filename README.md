@@ -62,11 +62,10 @@ python-project-template/
 │       └── feature_request.md
 │   └── PULL_REQUEST_TEMPLATE.md
 │   └── workflows/
-│       └── code-formatting-check.yaml
+│       └── code-checks.yaml
 │       └── docs-build-and-deploy.yaml
 │       └── package-pubilsh.yaml
 │       └── pytest.yaml
-│       └── type-hints-check.yaml
 ├── .vscode/
 │   └── launch.json
 │   └── settings.json
