@@ -8,9 +8,8 @@ This repository serves as a template for Python projects, designed to streamline
 <a href="https://alexpalms.github.io/"><img src="https://img.shields.io/badge/blog-read%20post-blue" alt="Blog Post"/></a>
 <a href="https://artificialtwin.com/"><img src="https://img.shields.io/badge/project-view%20page-gold" alt="Company Project"/></a>
 
-<a href="https://github.com/alexpalms/python-project-template/actions/workflows/type-hints-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/type-hints-check.yaml?label=type%20hints&logo=github" alt="Type Hints"/></a>
-<a href="https://github.com/alexpalms/python-project-template/actions/workflows/code-formatting-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/code-formatting-check.yaml?label=code%20formatting&logo=github" alt="Code Formatting"/></a>
-<a href="https://github.com/alexpalms/python-project-template/actions/workflows/pytest.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/pytest.yaml?label=pytest&logo=github" alt="Pytest"/></a>
+<a href="https://github.com/alexpalms/python-project-template/actions/workflows/code-formatting-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/code-checks.yaml?label=code%20checks%20(ruff%20%26%20pyright)&logo=github" alt="Code Checks"/></a>
+<a href="https://github.com/alexpalms/python-project-template/actions/workflows/pytest.yaml"><img src="https://img.shields.io/github/actions/workflow/status/alexpalms/python-project-template/pytest.yaml?label=pytest%20(pytest)&logo=github" alt="Pytest"/></a>
 
 
 <a href="https://github.com/diambra/arena/tags"><img src="https://img.shields.io/github/v/tag/diambra/arena?label=latest%20tag&logo=github" alt="Latest Tag"/></a>
@@ -27,7 +26,7 @@ This repository serves as a template for Python projects, designed to streamline
 [![codecov](https://codecov.io/github/alexpalms/python-project-template/graph/badge.svg?token=4817P3HFDN)](https://codecov.io/github/alexpalms/python-project-template)
 
 
-![Ruff](https://img.shields.io/badge/linting-ruff-4B8BBE?logo=python&logoColor=white)
+![Ruff](https://img.shields.io/badge/code%20checks-ruff%20%26%20pyright-4B8BBE?logo=python&logoColor=white)
 ![pytest](https://img.shields.io/badge/testing-pytest-2A6DB0?logo=python&logoColor=white)
 
 ![Python Versions](https://img.shields.io/pypi/pyversions/diambra-arena)
@@ -38,12 +37,14 @@ This repository serves as a template for Python projects, designed to streamline
 
 ![License](https://img.shields.io/github/license/alexpalms/python-project-template?cacheBust=1)
 
-### Dev environment setup
+### Package installation
 
 - Install `uv` ([Ref](https://github.com/astral-sh/uv)) (E.g. `curl -LsSf https://astral.sh/uv/install.sh | sh`)
-- Create a new virtual Python environment: `uv venv`
-- Install package `uv pip install -e .`
-- (Optional) Install package with group dependencies `uv pip install -e . --group dev`
+- Install package:
+  - Dev default (automatically includes `dev` packages and `editable` mode): `uv sync`
+  - Editable Only - No Dev Deps: `uv sync --no-dev`
+  - Dev Deps Only - Not Editable: `uv sync --no-editable`
+  - Production Like (No Dev Deps, Not Editable): `uv sync --no-dev --no-editable`
 
 ### Code quality
 
