@@ -30,7 +30,7 @@ This repository serves as a template for Python projects, designed to streamline
 ![pytest](https://img.shields.io/badge/testing-pytest-2A6DB0?logo=python&logoColor=white)
 
 ![Python Versions](https://img.shields.io/pypi/pyversions/diambra-arena)
-![Python >=3.9](https://img.shields.io/badge/python-%3E%3D3.9-blue)
+![Python >=3.9](https://img.shields.io/badge/python-%3E%3D3.9-blue?logo=python)
 
 ![Docker Image Version](https://img.shields.io/docker/v/diambra/engine?sort=semver)
 ![Docker Pulls](https://img.shields.io/docker/pulls/diambra/engine)
