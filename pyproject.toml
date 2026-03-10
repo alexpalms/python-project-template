@@ -7,12 +7,10 @@ name = "project-name"
 version = "0.1.0"
 keywords = ["keyword1", "keyword2"]
 maintainers = [
-  { name="name1", email="name1@domain.ext" },
-  { name="name2", email="name2@domain.ext" },
+  { name="Alessandro Palmas", email="alex@artificialtwin.com" },
 ]
 authors = [
-  { name="name1", email="name1@domain.ext" },
-  { name="name2", email="name2@domain.ext" },
+  { name="Alessandro Palmas", email="alex@artificialtwin.com" },
 ]
 description = "Add your description here"
 readme = { file = "README.md", content-type = "text/markdown"}
@@ -104,6 +102,15 @@ convention = "numpy"
 quote-style = "double"
 indent-style = "space"
 line-ending = "lf"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+  "--cov=src/sfiii_gym",
+  "--cov-report=term-missing",
+  "--cov-report=xml",
+  "-v"
+]
 
 [tool.coverage.run]
 source = ["src"]
