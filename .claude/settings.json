@@ -9,5 +9,9 @@
       "Edit(*.py, *.sh, *.md)",
       "Write(*.py, *.sh, *.md)"
     ]
+  },
+  "teammateMode": "tmux",
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   }
 }
