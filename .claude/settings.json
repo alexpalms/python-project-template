@@ -5,9 +5,11 @@
       "Bash(cd:*)",
       "Bash(uv run:*)",
       "Bash(git diff)",
-      "Read(*.py, *.sh, *.md)",
-      "Edit(*.py, *.sh, *.md)",
-      "Write(*.py, *.sh, *.md)"
+      "Bash(git mv:*)",
+      "Read",
+      "Edit(*.py, *.sh, *.md, *.yaml, *.json)",
+      "Write(*.py, *.sh, *.md, *.yaml, *.json)",
+      "Bash(find:*)"
     ]
   },
   "teammateMode": "tmux",
