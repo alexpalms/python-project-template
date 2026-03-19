@@ -106,7 +106,7 @@ line-ending = "lf"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = [
-  "--cov=src/sfiii_gym",
+  "--cov=src/project-name",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "-v"
