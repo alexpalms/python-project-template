@@ -7,9 +7,18 @@
       "Bash(git diff)",
       "Bash(git mv:*)",
       "Read",
-      "Edit(*.py, *.sh, *.md, *.yaml, *.json)",
-      "Write(*.py, *.sh, *.md, *.yaml, *.json)",
-      "Bash(find:*)"
+      "Edit(**/*.py)",
+      "Edit(**/*.sh)",
+      "Edit(**/*.md)",
+      "Edit(**/*.yaml)",
+      "Edit(**/*.json)",
+      "Write(**/*.py)",
+      "Write(**/*.sh)",
+      "Write(**/*.md)",
+      "Write(**/*.yaml)",
+      "Write(**/*.json)",
+      "Bash(find:*)",
+      "Bash(grep:*)"
     ]
   },
   "teammateMode": "tmux",
