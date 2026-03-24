@@ -12,12 +12,14 @@
       "Edit(**/*.md)",
       "Edit(**/*.yaml)",
       "Edit(**/*.json)",
+      "Edit(**/*.toml)",
       "Write(**/*.py)",
       "Write(**/*.sh)",
       "Write(**/*.md)",
       "Write(**/*.yaml)",
       "Write(**/*.json)",
       "Bash(find:*)",
+      "Bash(ls:*)",
       "Bash(grep:*)"
     ]
   },
