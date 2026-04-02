@@ -2,9 +2,9 @@ name: Build and Deploy Sphinx Docs
 # Needs to enable `pages` in the repo settings first, free only for public repos
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   workflow_dispatch:
 
 jobs:
@@ -25,10 +25,9 @@ jobs:
         run: uv sync --group docs
 
       - name: Build documentation
-        run: |
-          uv run make -C docs html
+        run: uv run make -C docs html
 
-      - name: Upload built docs as artifact
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/build/html
@@ -36,7 +35,7 @@ jobs:
   deploy-docs:
     name: Deploy Sphinx Docs
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-docs
     permissions:
       pages: write
       id-token: write
